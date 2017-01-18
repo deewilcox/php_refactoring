@@ -23,6 +23,7 @@ class Rental
     }
 
     /**
+     * This returns a Movie Object, which contains both the category and price code.
      * @return Movie
      */
     public function movie()
@@ -36,5 +37,13 @@ class Rental
     public function daysRented()
     {
         return $this->daysRented;
+    }
+
+    /**
+     * @return int
+     */
+    public function category()
+    {
+        return $this->movie->category;
     }
 }

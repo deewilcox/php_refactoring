@@ -1,29 +1,39 @@
 <?php
 
+include_once ('Categories.php');
+
 class Movie
 {
-    const CHILDRENS = 2;
-    const REGULAR = 0;
-    const NEW_RELEASE = 1;
-
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      */
-    private $priceCode;
+    public $priceCode;
 
     /**
-     * @param string $name
-     * @param int $priceCode
+     * @var string
      */
-    public function __construct($name, $priceCode)
+    public $category;
+    
+    /**
+     * @param string $name
+     * @param string $category
+     */
+    public function __construct($name, $category)
     {
         $this->name = $name;
-        $this->priceCode = $priceCode;
+        
+        $categories = new Categories();
+        $categoryDetail = $categories->getCategory($category);
+
+        if( (!empty($categoryDetail)) && (isset($categoryDetail['name'])) ){
+            $this->category = $categoryDetail['name'];
+            $this->priceCode = $categoryDetail['price_code'];
+        }
     }
 
     /**
